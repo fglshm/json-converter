@@ -129,7 +129,7 @@ for key, value in zip(keys, values):
     new_key = convert(tmp_key, option)
     var_decl = add_anotation(key, new_key, check_type(value))
     with open(to_file, 'a') as f:
-        f.write('%s\n' % '\n'.join(var_decl))
+        f.write('%s\n\n' % '\n'.join(var_decl))
 
 print('変換が終了しました.')
 print('---> %s' % to_file)
