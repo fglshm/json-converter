@@ -6,9 +6,11 @@ from enum import Enum
 
 
 def check_type(val):
-    '''
+    """
+        --------------------
         値の型をチェックする関数
-    '''
+        --------------------
+    """
     if type(val) == int:
         if len(str(val)) > 8:
             return 'Long'
@@ -24,7 +26,9 @@ def check_type(val):
 
 def convert(key, option):
     """
+        -------------------------------------------
         key にアンダースコアが含まれなくなるまでループを回す
+        -------------------------------------------
     """
 
     # return 用の key
@@ -45,6 +49,11 @@ def convert(key, option):
 
 
 def remove_underscore(key):
+    """
+        ------------------------------------
+        アンダースコアを削除し、キャメルケースに変換
+        ------------------------------------
+    """
     # アンダースコアの位置
     us_idx = key.index('_')
 
@@ -64,11 +73,9 @@ def remove_underscore(key):
 
 def add_anotation(old, new, t):
     """
+        --------------------------------------------
         Kotlin のクラスのメンバ変数定義のように文字列を生成
-        --------------------------
-        @SerializedName(user_id)
-        var userId: String? = null
-        --------------------------
+        --------------------------------------------
     """
     ant = '@SerializedName("%s")' % old
     var_decl = 'var %s: %s? = null' % (new, t)
@@ -121,4 +128,8 @@ for key, value in zip(keys, values):
     tmp_key = key
     new_key = convert(tmp_key, option)
     var_decl = add_anotation(key, new_key, check_type(value))
-    print(var_decl)
+    with open(to_file, 'a') as f:
+        f.write('%s\n' % '\n'.join(var_decl))
+
+print('変換が終了しました.')
+print('---> %s' % to_file)
