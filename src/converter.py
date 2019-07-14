@@ -109,8 +109,8 @@ else:
     sys.exit()
 
 
-from_file = './from/' + args[1]
-to_file = './to/' + args[2]
+from_file = '../from/' + args[1]
+to_file = '../to/' + args[2]
 option = len_args == 5 and args[4] == 'm'
 
 from_exists = os.path.exists(from_file)
